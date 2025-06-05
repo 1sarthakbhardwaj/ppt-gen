@@ -14,7 +14,7 @@ st.set_page_config(
 
 st.title("Create Beautiful PPTs from Any Topic 🌟")
 st.markdown(
-    "Enter a topic, provide your API keys, and get a professional PPTX auto-generated using AI + the PPTX Toolkit."
+    "Enter a topic, provide your API keys, and get a professional PPTXX auto-generated using AI + the PPTX Toolkit."
 )
 
 # --- Sidebar Config ---
@@ -42,9 +42,9 @@ You are an expert PowerPoint slide generator for CAMEL PPTXToolkit.
 - **Title slide:** 
   {{"title": ..., "subtitle": ...}}
 - **Bullet slide:** 
-  {{"heading": ..., "bullet_points": ["...", "..."], "img_keywords": "..."}}
+  {{"heading": ..., "bullet_points": ["...", "...",....], "img_keywords": "..."}}
 - **Step-by-step slide:** 
-  {{"heading": ..., "bullet_points": [">> Step 1: ...", ">> Step 2: ...", ">> Step 3: ..."], "img_keywords": "..."}}
+  {{"heading": ..., "bullet_points": [">> Step 1: ...", ">> Step 2: ...", ">> Step 3: ...",....], "img_keywords": "..."}}
   (If a bullet starts with ">>", it's rendered as a pentagon/chevron shape.)
 - **Table slide:** 
   {{"heading": ..., "table": {{"headers": [...], "rows": [[...],[...],[...]]}}, "img_keywords": "..."}}
@@ -52,8 +52,8 @@ You are an expert PowerPoint slide generator for CAMEL PPTXToolkit.
 **REQUIRED FORMAT:**
 [
   {{"title": "Title for {topic}", "subtitle": "Subtitle for this topic"}},
-  {{"heading": "...", "bullet_points": ["...", "..."], "img_keywords": "..."}},
-  {{"heading": "...", "bullet_points": [">> Step 1: ...", ">> Step 2: ..."], "img_keywords": "..."}},
+  {{"heading": "...", "bullet_points": ["...", "...",....], "img_keywords": "..."}},
+  {{"heading": "...", "bullet_points": [">> Step 1: ...", ">> Step 2: ...",.....], "img_keywords": "..."}},
   {{"heading": "...", "table": {{"headers": ["Col1", "Col2"], "rows": [["A", "B"], ["C", "D"]]}}, "img_keywords": "..."}},
   ...
 ]
@@ -64,16 +64,17 @@ You are an expert PowerPoint slide generator for CAMEL PPTXToolkit.
 3. Include at least one table slide.
 4. At least TWO slides (not counting the title slide) MUST have non-empty, relevant "img_keywords" (search terms, not URLs) for the image field. Use visually interesting or topic-relevant keywords.
 5. For all bullet slides, use Markdown syntax for bold (**text**) and italics (*text*).
-6. Make content clear, concise, and visually engaging. 
-7. Do NOT output markdown code fences or commentary—only raw JSON array.
+6. **All bullet and step-by-step slides must include at least Four bullet points.**
+7. Make content clear, concise, and visually engaging. 
+8. Do NOT output markdown code fences or commentary—only raw JSON array.
 
 **Styling Note:** Slides will be rendered with a dark background and white text (no need to mention this, just make sure content is readable).
 
 **Example:**
 [
   {{"title": "AI Agents", "subtitle": "Exploring the world of artificial intelligence agents"}},
-  {{"heading": "Types of AI Agents", "bullet_points": ["Intelligent Virtual Agents", "Autonomous Agents", "Collaborative Agents"], "img_keywords": "AI, technology"}},
-  {{"heading": "Creating an AI Agent", "bullet_points": [">> Step 1: Define the goal", ">> Step 2: Choose algorithms", ">> Step 3: Implement and test"], "img_keywords": "workflow, robotics"}},
+  {{"heading": "Types of AI Agents", "bullet_points": ["Intelligent Virtual Agents", "Autonomous Agents", "Collaborative Agents",....], "img_keywords": "AI, technology"}},
+  {{"heading": "Creating an AI Agent", "bullet_points": [">> Step 1: Define the goal", ">> Step 2: Choose algorithms", ">> Step 3: Implement and test",">> Step 4:......], "img_keywords": "workflow, robotics"}},
   {{"heading": "Comparison of AI Agents", "table": {{"headers": ["Type", "Capabilities", "Examples"], "rows": [["Virtual", "Conversational AI", "Siri"], ["Autonomous", "Self-learning", "Robots"]]}}, "img_keywords": "comparison chart, table"}},
   ... (add more if needed) ...
 ]
@@ -120,7 +121,8 @@ def build_pptx(slides):
     out_name = f"demo_pptx_{abs(hash(json.dumps(slides)))}.pptx"
     result = pptx_toolkit.create_presentation(
         json.dumps(slides),
-        out_name
+        out_name,
+        "pptx_toolkit_usecase/slides_templates/blank.pptx"      
     )
     pptx_path = os.path.join("outputs", out_name)
     if os.path.exists(pptx_path):
