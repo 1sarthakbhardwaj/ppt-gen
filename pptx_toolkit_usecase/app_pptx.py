@@ -14,7 +14,7 @@ st.set_page_config(
 
 st.title("Create Beautiful PPTs from Any Topic 🌟")
 st.markdown(
-    "Enter a topic, provide your API keys, and get a professional PPTXX auto-generated using AI + the PPTX Toolkit."
+    "Enter a topic, provide your API keys, and get a professional PPTX auto-generated using AI + the PPTX Toolkit."
 )
 
 # --- Sidebar Config ---
